@@ -367,9 +367,11 @@ p {
 
 .intro-photo img {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: auto;
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius-md);
   object-fit: cover;
+  object-position: center 52%;
 }
 
 .intro-quote {

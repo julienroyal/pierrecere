@@ -38,7 +38,7 @@ if (!reduceMotion && "IntersectionObserver" in window) {
     { rootMargin: "8% 0px", threshold: 0.08 }
   );
 
-  document.querySelectorAll(".hero-photo img, .contact-photo img, .intro-photo img").forEach((image) => imageObserver.observe(image));
+  document.querySelectorAll(".hero-photo img, .contact-photo img, .intro-photo img, .npd-photo img").forEach((image) => imageObserver.observe(image));
 }
 
 const mobileSupportCta = document.querySelector(".mobile-support-cta");

@@ -425,6 +425,108 @@ p {
   margin-top: 1.1em;
 }
 
+.text-emphasis {
+  padding-inline: 0.06em;
+  color: var(--charcoal-dark);
+  font-weight: 850;
+  box-shadow: inset 0 -0.42em 0 rgba(253, 185, 19, 0.58);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.npd-section {
+  padding-block: clamp(82px, 11vw, 148px);
+  border-top: 1px solid #c4c6c7;
+  background: var(--white);
+}
+
+.npd-section-inner {
+  display: grid;
+  gap: clamp(48px, 10vw, 96px);
+}
+
+.npd-content {
+  position: relative;
+  padding-top: 0;
+}
+
+.npd-quote-glyph {
+  position: absolute;
+  top: -70px;
+  left: -4px;
+  color: var(--orange);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 118px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.15;
+}
+
+.npd-content h2 {
+  position: relative;
+  max-width: 12ch;
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(42px, 10.5vw, 70px);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.npd-attribution {
+  margin: 28px 0 0;
+  color: var(--orange-dark);
+  font-weight: 900;
+}
+
+.npd-copy {
+  max-width: 64ch;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #c4c6c7;
+  color: var(--charcoal);
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.72;
+}
+
+.npd-copy p {
+  margin: 0;
+}
+
+.npd-copy p + p {
+  margin-top: 1.25em;
+}
+
+.npd-photo {
+  position: relative;
+  width: calc(100% - 18px);
+  margin: 0 0 18px 18px;
+}
+
+.npd-photo::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: -18px;
+  left: -18px;
+  width: 64%;
+  height: 44%;
+  border-radius: var(--radius-md);
+  background: var(--yellow);
+}
+
+.npd-photo img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  object-position: center;
+}
+
 .bio-section {
   display: grid;
   gap: 44px;
@@ -639,7 +741,13 @@ p {
   font-size: 18px;
 }
 
-.contact-content a {
+.contact-links {
+  display: grid;
+  width: min(100%, 500px);
+  gap: 30px;
+}
+
+.contact-email {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -652,6 +760,47 @@ p {
   font-weight: 900;
   overflow-wrap: anywhere;
   transition: gap 220ms var(--ease-out), color 180ms ease;
+}
+
+.social-links {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(48, 49, 52, 0.38);
+  list-style: none;
+}
+
+.social-links li {
+  border-bottom: 1px solid rgba(48, 49, 52, 0.38);
+}
+
+.social-links a {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 10px;
+  color: var(--charcoal-dark);
+  text-decoration: none;
+  transition: color 180ms ease, padding-left 220ms var(--ease-out);
+}
+
+.social-link-label {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.social-link-label strong {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.social-link-label > span {
+  margin-top: 3px;
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .bottom-support {
@@ -726,7 +875,12 @@ p {
   font-size: 14px;
 }
 
-.footer-inner > a:last-child {
+.footer-inner .footer-photo-credit {
+  font-size: 12px;
+  opacity: 0.76;
+}
+
+.footer-inner > a[href^="mailto:"] {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -819,9 +973,14 @@ p {
     gap: 22px 36px;
   }
 
-  .footer-inner p {
+  .footer-tagline {
     grid-column: 1 / -1;
     grid-row: 2;
+  }
+
+  .footer-photo-credit {
+    grid-column: 1 / -1;
+    grid-row: 3;
   }
 
   .mobile-support-cta {
@@ -856,6 +1015,25 @@ p {
 
   .intro-quote h2 {
     font-size: clamp(38px, 5.8vw, 52px);
+  }
+
+  .npd-section-inner {
+    grid-template-columns: minmax(300px, 0.88fr) minmax(400px, 1.12fr);
+    align-items: center;
+    gap: clamp(56px, 8vw, 112px);
+  }
+
+  .npd-content {
+    padding-top: 0;
+  }
+
+  .npd-content h2 {
+    font-size: clamp(50px, 5.2vw, 70px);
+  }
+
+  .npd-photo {
+    width: calc(100% - 18px);
+    margin-left: 18px;
   }
 
   .bio-section {
@@ -1033,9 +1211,14 @@ p {
     gap: 40px;
   }
 
-  .footer-inner p {
+  .footer-tagline {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .footer-photo-credit {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }
 
@@ -1100,8 +1283,13 @@ p {
     transform: translateY(-2px) scale(1.04);
   }
 
-  .contact-content a:hover {
+  .contact-email:hover {
     gap: 24px;
+    color: var(--white);
+  }
+
+  .social-links a:hover {
+    padding-left: 8px;
     color: var(--white);
   }
 }

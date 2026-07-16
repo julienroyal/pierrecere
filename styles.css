@@ -177,12 +177,10 @@ p {
 }
 
 .hero-accent {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  top: 32%;
-  right: 0;
-  width: 12px;
-  height: 22%;
+  width: 100%;
+  height: 10px;
   background: var(--yellow);
 }
 
@@ -198,26 +196,27 @@ p {
 
 .support-heading {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 13px;
 }
 
 .support-mark {
   flex: 0 0 7px;
   width: 7px;
-  height: 48px;
+  height: clamp(24px, 7vw, 34px);
   border-radius: 999px;
   background: var(--orange);
 }
 
 .support-heading h2 {
-  max-width: 15ch;
-  margin: -3px 0 0;
+  max-width: none;
+  margin: 0;
   font-family: "Source Serif 4", Georgia, serif;
-  font-size: clamp(30px, 8vw, 36px);
+  font-size: clamp(24px, 7vw, 34px);
   font-weight: 850;
   letter-spacing: -0.025em;
   line-height: 1.02;
+  white-space: nowrap;
 }
 
 .support-form {
@@ -899,6 +898,10 @@ p {
 }
 
 @media (min-width: 900px) {
+  .support-mark {
+    height: 48px;
+  }
+
   :root {
     --shell: min(100% - 64px, 1280px);
   }
@@ -944,6 +947,7 @@ p {
   }
 
   .hero-accent {
+    position: absolute;
     top: 0;
     right: auto;
     left: calc(43.75% - 12px);
@@ -965,7 +969,10 @@ p {
   }
 
   .support-heading h2 {
+    max-width: 15ch;
+    margin-top: -3px;
     font-size: 28px;
+    white-space: normal;
   }
 
   .support-form {
@@ -1055,6 +1062,7 @@ p {
     max-width: none;
     margin-top: 0;
     font-size: 26px;
+    white-space: nowrap;
   }
 
   .support-form {

@@ -80,8 +80,9 @@ const validateField = (input) => {
 };
 
 document.querySelectorAll("[data-support-form]").forEach((form) => {
-  const inputs = [...form.querySelectorAll("input")];
+  const inputs = [...form.querySelectorAll(".field input")];
   const status = form.querySelector(".form-status");
+  const submitButton = form.querySelector('button[type="submit"]');
 
   inputs.forEach((input) => {
     input.addEventListener("blur", () => validateField(input));
@@ -90,16 +91,46 @@ document.querySelectorAll("[data-support-form]").forEach((form) => {
     });
   });
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const valid = inputs.map(validateField).every(Boolean);
 
     if (!valid) {
+      status.dataset.state = "error";
       status.textContent = "Vérifiez les champs indiqués avant de continuer.";
       form.querySelector('[aria-invalid="true"]')?.focus();
       return;
     }
 
-    status.textContent = "Merci pour votre appui. Le formulaire sera bientôt relié à la campagne.";
+    status.dataset.state = "sending";
+    status.textContent = "Envoi de votre appui en cours…";
+    form.setAttribute("aria-busy", "true");
+    if (submitButton) submitButton.disabled = true;
+
+    const formData = new FormData(form);
+    formData.set("replyTo", formData.get("email"));
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error("Static Forms submission failed");
+      }
+
+      form.reset();
+      inputs.forEach((input) => input.removeAttribute("aria-invalid"));
+      status.dataset.state = "success";
+      status.textContent = "Merci pour votre appui. Vos informations ont bien été transmises à la campagne.";
+    } catch (error) {
+      status.dataset.state = "error";
+      status.textContent = "Une erreur est survenue pendant l’envoi. Veuillez réessayer dans quelques instants.";
+    } finally {
+      form.removeAttribute("aria-busy");
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 });

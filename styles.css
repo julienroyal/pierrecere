@@ -288,8 +288,8 @@ p {
   padding: 0 18px;
   border: 0;
   border-radius: var(--radius-sm);
-  color: var(--white);
-  background: var(--orange-dark);
+  color: var(--ink);
+  background: var(--yellow);
   font-weight: 900;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -299,6 +299,24 @@ p {
 .submit-button:active,
 .mobile-support-cta:active {
   transform: translateY(1px) scale(0.99);
+}
+
+.submit-button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+  transform: none;
+}
+
+.form-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .form-status {
@@ -313,6 +331,14 @@ p {
 
 .form-status:empty {
   display: none;
+}
+
+.form-status[data-state="success"] {
+  color: #17632f;
+}
+
+.form-status[data-state="error"] {
+  color: var(--error);
 }
 
 .intro-section {
@@ -718,8 +744,8 @@ p {
   place-items: center;
   padding: 13px 22px;
   border-radius: 999px;
-  color: var(--white);
-  background: var(--orange-dark);
+  color: var(--ink);
+  background: var(--yellow);
   box-shadow: 0 8px 22px rgba(32, 33, 36, 0.26);
   text-align: center;
   text-decoration: none;
@@ -1049,8 +1075,8 @@ p {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .submit-button:hover {
-    background: #7f3400;
+  .submit-button:not(:disabled):hover {
+    background: #e2a200;
     transform: translateY(-2px);
   }
 
